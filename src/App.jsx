@@ -193,9 +193,12 @@ const App = () => {
 
             {/* Navigation */}
             <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-full px-2 py-2 flex items-center space-x-1 shadow-2xl">
-                <div className="px-4 border-r border-white/10 mr-2">
-                    <img src="/peacock-brand.png" alt="Logo" className="w-6 h-6 hover:scale-125 transition-transform" />
-                </div>
+                <button
+                    onClick={() => executeCommand('./About', 'info')}
+                    className={`px-4 border-r border-white/10 mr-2 transition-all duration-500 hover:scale-110 active:scale-95 group/logo ${activeTab === 'info' ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`}
+                >
+                    <img src="/peacock-brand.png" alt="Logo" className={`w-10 h-10 transition-all duration-300 ${activeTab === 'info' ? 'drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] scale-110' : 'grayscale group-hover/logo:grayscale-0 group-hover/logo:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]'}`} />
+                </button>
                 <NavItem id="home" label="Home" icon={Terminal} />
                 <NavItem id="projects" label="Work" icon={Smartphone} />
                 <NavItem id="iot" label="IoT" icon={Cpu} />
@@ -241,14 +244,12 @@ const App = () => {
                                     >
                                         Execute_Deployment <ExternalLink size={16} />
                                     </button>
-                                    <a
-                                        href="https://linkedin.com"
-                                        target="_blank"
-                                        rel="noreferrer"
+                                    <button
+                                        onClick={() => executeCommand('./About', 'info')}
                                         className="px-8 py-4 bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest rounded-2xl hover:bg-white/10 transition-all"
                                     >
-                                        Connect
-                                    </a>
+                                        Information Node
+                                    </button>
                                 </div>
                             </div>
 
@@ -325,6 +326,123 @@ const App = () => {
                                     <p className="text-xs text-slate-500 font-medium group-hover:text-slate-400 transition-colors">{skill.desc}</p>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'info' && (
+                    <div className="max-w-4xl mx-auto space-y-32 animate-in fade-in slide-in-from-bottom duration-1000 py-20 px-6">
+                        {/* Essential Identity Header */}
+                        <header className="grid md:grid-cols-2 gap-16 items-center">
+                            <div className="relative group/identity order-2 md:order-1">
+                                <div className="absolute -inset-4 bg-emerald-500/5 blur-3xl rounded-full opacity-0 group-hover/identity:opacity-100 transition-opacity"></div>
+                                <div className="aspect-[4/5] bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden relative z-10">
+                                    <img
+                                        src="/peacock-brand.png"
+                                        alt="Identity"
+                                        className="w-full h-full object-contain p-12 opacity-80 group-hover/identity:scale-105 group-hover/identity:opacity-100 transition-all duration-1000 grayscale group-hover/identity:grayscale-0"
+                                    />
+                                    {/* Minimal Frame */}
+                                    <div className="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-emerald-500/30"></div>
+                                    <div className="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-emerald-500/30"></div>
+                                </div>
+                                <div className="absolute -bottom-6 -left-6 z-20 bg-[#0a0a0c] border border-white/5 p-4 rounded-2xl shadow-2xl space-y-1">
+                                    <p className="text-[10px] font-black text-emerald-500/60 uppercase tracking-widest">Active_Node</p>
+                                    <p className="text-xl font-black text-white italic tracking-tighter">GOURAV_P</p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-10 order-1 md:order-2">
+                                <div className="space-y-4">
+                                    <span className="text-[10px] font-black text-slate-700 uppercase tracking-[0.5em] block">./The_Architect</span>
+                                    <h2 className="text-7xl md:text-9xl font-black text-white tracking-tighter leading-none italic uppercase">
+                                        INF0_<br />CORE
+                                    </h2>
+                                </div>
+                                <p className="text-2xl text-slate-400 font-light leading-relaxed max-w-sm">
+                                    Building minimal, <span className="text-white">high-fidelity</span> software interfaces and resilient decentralised systems.
+                                </p>
+                            </div>
+                        </header>
+
+                        {/* Staggered Content Flow */}
+                        <div className="space-y-40">
+                            {/* Section 1: Education */}
+                            <div className="flex flex-col md:flex-row gap-12 md:gap-24 items-start">
+                                <div className="md:w-1/3 pt-4">
+                                    <h3 className="text-4xl font-black text-white uppercase italic tracking-tighter sticky top-40">Education</h3>
+                                    <p className="text-[10px] font-bold text-emerald-500/40 uppercase tracking-[0.6em] mt-4">0x01_ACADEMIA</p>
+                                </div>
+                                <div className="md:w-2/3 space-y-12">
+                                    <div className="group border-b border-white/5 pb-10">
+                                        <h4 className="text-2xl font-black text-white mb-2 uppercase group-hover:text-emerald-400 transition-colors">Computer Science Engineering</h4>
+                                        <p className="text-lg text-slate-500 leading-relaxed font-light">
+                                            Specializing in decentralized networks and system performance. Researching how minimalist design can reduce user friction in dense data environments.
+                                        </p>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-8">
+                                        {['Architectures', 'Cloud Native', 'Cybersecurity', 'AI Systems'].map(skill => (
+                                            <div key={skill} className="flex gap-4 items-center">
+                                                <div className="w-2 h-2 rounded-full bg-emerald-500/20"></div>
+                                                <span className="text-[12px] font-black text-slate-600 uppercase tracking-widest">{skill}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Section 2: Ventures */}
+                            <div className="flex flex-col md:flex-row-reverse gap-12 md:gap-24 items-start">
+                                <div className="md:w-1/3 pt-4 text-left md:text-right">
+                                    <h3 className="text-4xl font-black text-white uppercase italic tracking-tighter sticky top-40">Ventures</h3>
+                                    <p className="text-[10px] font-bold text-blue-500/40 uppercase tracking-[0.6em] mt-4">0x02_STARTUPS</p>
+                                </div>
+                                <div className="md:w-2/3 space-y-12">
+                                    <div className="group border-b border-white/5 pb-10">
+                                        <h4 className="text-2xl font-black text-white mb-2 uppercase group-hover:text-blue-400 transition-colors">Project_Alpha</h4>
+                                        <p className="text-lg text-slate-500 leading-relaxed font-light">
+                                            Developing a decentralized communication bridge between local IoT hardware and high-scale cloud clusters. Focus on sub-ms latency and zero-trust protocol implementation.
+                                        </p>
+                                    </div>
+                                    <div className="p-8 bg-white/[0.01] border border-white/5 rounded-3xl">
+                                        <div className="flex justify-between items-end">
+                                            <span className="text-[10px] font-black text-slate-700 uppercase tracking-widest">Protocol_V2_Sync</span>
+                                            <span className="text-xl font-mono text-blue-500">92.4%</span>
+                                        </div>
+                                        <div className="h-1 w-full bg-white/5 rounded-full mt-4 overflow-hidden">
+                                            <div className="h-full bg-blue-500 w-[92.4%] animate-pulse"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Section 3: Principles */}
+                            <div className="flex flex-col md:flex-row gap-12 md:gap-24 items-start">
+                                <div className="md:w-1/3 pt-4">
+                                    <h3 className="text-4xl font-black text-white uppercase italic tracking-tighter sticky top-40">Ideology</h3>
+                                    <p className="text-[10px] font-bold text-purple-500/40 uppercase tracking-[0.6em] mt-4">0x03_ETHOS</p>
+                                </div>
+                                <div className="md:w-2/3">
+                                    <blockquote className="text-4xl font-black text-white tracking-tighter leading-tight italic">
+                                        "REDUCTION IS NOT JUST DELETING; IT IS THE PURSUIT OF <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-500">ESSENCE</span>."
+                                    </blockquote>
+                                    <p className="text-lg text-slate-500 mt-10 leading-relaxed font-light">
+                                        I believe in interfaces that disappear. My work focuses on removing the noise between human intent and machine execution, creating tools that feel like extensions of the user rather than obstacles.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Minimal Navigation */}
+                        <div className="pt-20 flex flex-col items-center gap-12">
+                            <button
+                                onClick={() => executeCommand('./Return', 'home')}
+                                className="group px-12 py-5 bg-white text-black font-black uppercase text-xs rounded-2xl hover:bg-emerald-500 transition-all shadow-2xl flex items-center gap-4 tracking-[0.4em]"
+                            >
+                                <ChevronRight className="rotate-180" size={18} />
+                                <span>RETURN_TO_HOME</span>
+                            </button>
+                            <p className="text-[8px] font-black text-slate-800 uppercase tracking-[0.8em]">End_Of_Node</p>
                         </div>
                     </div>
                 )}
