@@ -159,9 +159,9 @@ const App = () => {
             {isBooting && (
                 <div className="fixed inset-0 z-[10001] bg-[#0a0a0c] flex flex-col items-center justify-center p-6 space-y-12">
                     <div className="relative">
-                        <div className="w-24 h-24 border-2 border-emerald-500/20 rounded-full animate-[spin_3s_linear_infinite]" />
+                        <div className="w-32 h-32 border-2 border-emerald-500/20 rounded-full animate-[spin_3s_linear_infinite]" />
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <Activity className="text-emerald-500 animate-pulse" size={40} />
+                            <img src="/peacock-brand.png" alt="Logo" className="w-16 h-16 animate-pulse drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" />
                         </div>
                     </div>
                     <div className="text-center space-y-2">
@@ -193,6 +193,9 @@ const App = () => {
 
             {/* Navigation */}
             <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-full px-2 py-2 flex items-center space-x-1 shadow-2xl">
+                <div className="px-4 border-r border-white/10 mr-2">
+                    <img src="/peacock-brand.png" alt="Logo" className="w-6 h-6 hover:scale-125 transition-transform" />
+                </div>
                 <NavItem id="home" label="Home" icon={Terminal} />
                 <NavItem id="projects" label="Work" icon={Smartphone} />
                 <NavItem id="iot" label="IoT" icon={Cpu} />
@@ -216,7 +219,10 @@ const App = () => {
                                 </div>
 
                                 <div className="relative group">
-                                    <h1 className="text-6xl md:text-[11rem] font-black text-white leading-[0.85] tracking-tighter drop-shadow-[0_20px_50px_rgba(0,0,0,1)] crt-flicker">
+                                    <div className="absolute -top-24 -left-12 opacity-20 group-hover:opacity-40 transition-opacity">
+                                        <img src="/peacock-brand.png" alt="Peacock" className="w-64 h-64 blur-2xl animate-pulse" />
+                                    </div>
+                                    <h1 className="text-6xl md:text-[11rem] font-black text-white leading-[0.85] tracking-tighter drop-shadow-[0_20px_50px_rgba(0,0,0,1)] crt-flicker relative z-10">
                                         GOURAV<br />
                                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-500 drop-shadow-glow">SINGH</span>
                                     </h1>
@@ -829,41 +835,51 @@ const PeacockGame = () => {
                 </div>
             ))}
 
-            <div className="absolute top-8 left-10 flex flex-col z-20">
-                <span className="text-[10px] text-emerald-500/30 font-black tracking-[0.5em] mb-1">CORE_ENGINE_v4.1</span>
+            <div className="absolute top-8 left-10 z-20">
                 <span className="text-4xl text-white font-black tracking-tighter tabular-nums drop-shadow-glow">
                     {score.toString().padStart(5, '0')}
                 </span>
             </div>
 
             <div className="absolute top-8 right-10 text-right z-20">
-                <span className="text-[8px] text-slate-700 font-bold block mb-1 uppercase tracking-widest">Hi_Stable</span>
+                <span className="text-[8px] text-slate-700 font-bold block mb-1 uppercase tracking-widest">BEST</span>
                 <span className="text-sm text-emerald-500/60 font-black">{highScore.toString().padStart(5, '0')}</span>
             </div>
 
             {gameState === 'START' && (
-                <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl flex items-center justify-center z-30 group-hover:bg-black/90 transition-all">
-                    <div className="text-center animate-in zoom-in duration-500">
-                        <div className="opacity-10 group-hover:opacity-100 transition-opacity mb-8 scale-150">
-                            <PixelPeacock isJumping={false} />
+                <div className="absolute inset-0 bg-black/90 backdrop-blur-2xl flex items-center justify-center z-30 group-hover:bg-black/85 transition-all">
+                    <div className="text-center animate-in zoom-in duration-700">
+                        <div className="mb-10 scale-150 relative">
+                            <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full animate-pulse"></div>
+                            <img src="/peacock-brand.png" alt="Start" className="w-16 h-16 relative z-10 opacity-40 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" />
                         </div>
-                        <span className="text-emerald-500 font-black tracking-[1.2em] text-[10px] block mb-4 uppercase ml-[1.2em]">BOOT_LINK</span>
-                        <p className="text-[8px] text-slate-700 font-mono tracking-widest">[ SPACE / CLICK ]</p>
+                        <h2 className="text-white font-black text-5xl tracking-[0.2em] mb-6 uppercase italic drop-shadow-glow select-none">START</h2>
+                        <p className="text-[10px] text-emerald-500/40 font-black tracking-[0.5em] animate-pulse">[ SPACE_BAR / CLICK ]</p>
                     </div>
                 </div>
             )}
 
             {gameState === 'GAME_OVER' && (
-                <div className="absolute inset-0 bg-[#050505]/98 backdrop-blur-3xl flex items-center justify-center z-40">
-                    <div className="text-center p-12">
-                        <span className="text-red-500/50 font-black tracking-[1em] text-3xl block mb-6 uppercase italic ml-[1em]">OFFLINE</span>
-                        <div className="mb-10 space-y-1">
-                            <span className="text-slate-800 text-[8px] font-black uppercase tracking-[0.3em] block">TERMINATED_AT</span>
-                            <span className="text-white font-black text-3xl tracking-tighter tabular-nums">{score}</span>
+                <div className="absolute inset-0 bg-black/95 backdrop-blur-3xl flex items-center justify-center z-40 transition-all">
+                    <div className="text-center p-12 animate-in zoom-in duration-300">
+                        <div className="mb-8 flex justify-center relative">
+                            <div className="absolute inset-0 bg-red-500/20 blur-3xl rounded-full"></div>
+                            <img src="/peacock-brand.png" alt="Lost" className="w-20 h-20 relative z-10 opacity-60 drop-shadow-[0_0_40px_rgba(239,68,68,0.3)]" />
                         </div>
-                        <div className="px-12 py-4 bg-emerald-500 text-black font-black text-[10px] rounded-full hover:bg-emerald-400 hover:scale-110 active:scale-95 transition-all shadow-[0_0_50px_rgba(16,185,129,0.2)] uppercase tracking-[0.4em]">
-                            REBOOT
+
+                        <h2 className="text-red-500 font-black tracking-[0.1em] text-5xl mb-8 uppercase italic drop-shadow-[0_0_20px_rgba(239,68,68,0.5)]">U LOST</h2>
+
+                        <div className="mb-10 p-6 bg-white/[0.02] border border-white/5 rounded-2xl backdrop-blur-md">
+                            <span className="text-slate-500 text-[10px] font-black uppercase tracking-[0.4em] block mb-2">FINAL_SCORE</span>
+                            <span className="text-white font-black text-5xl tracking-tighter tabular-nums drop-shadow-glow">{score}</span>
                         </div>
+
+                        <button
+                            onClick={jump}
+                            className="px-16 py-5 bg-white text-black font-black text-xs rounded-full hover:scale-110 active:scale-95 transition-all shadow-[0_0_30px_rgba(255,255,255,0.3)] uppercase tracking-[0.5em]"
+                        >
+                            PLAY AGAIN
+                        </button>
                     </div>
                 </div>
             )}
