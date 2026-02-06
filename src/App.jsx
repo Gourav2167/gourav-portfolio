@@ -675,7 +675,7 @@ const ConnectivityBridge = ({ addLog }) => {
                     addLog={addLog}
                 />
                 <SocialLink
-                    href="https://linkedin.com/in/gourav-singh"
+                    href="https://linkedin.com/in/gourav-singh01"
                     icon={<Linkedin size={20} />}
                     label="MESH_NODE"
                     id="linkedin"
