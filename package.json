@@ -7,7 +7,9 @@
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint .",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "deploy": "wrangler pages deploy dist",
+        "pages:dev": "wrangler pages dev dist"
     },
     "dependencies": {
         "lucide-react": "^0.454.0",
@@ -19,6 +21,7 @@
         "autoprefixer": "^10.4.20",
         "postcss": "^8.4.47",
         "tailwindcss": "^3.4.14",
-        "vite": "^5.4.10"
+        "vite": "^5.4.10",
+        "wrangler": "^4.63.0"
     }
 }
