@@ -31,13 +31,11 @@ const App = () => {
     const [isHovering, setIsHovering] = useState(false);
 
     const logs = [
-        "Establishing encrypted tunnel...",
-        "Initializing Flutter environment...",
-        "Connecting to Supabase instance...",
-        "Syncing Cardano Hydra nodes...",
-        "NASA Power API handshake: SUCCESS",
-        "Deploying Aiken Smart Contracts...",
-        "Gourav Singh v2.6 Online."
+        "Loading portfolio...",
+        "Preparing projects...",
+        "Setting up environment...",
+        "Almost ready...",
+        "Welcome!"
     ];
 
     const addLog = (message) => {
@@ -133,10 +131,10 @@ const App = () => {
         }
     };
 
-    const NavItem = ({ id, label, icon: Icon }) => (
+    const NavItem = ({ id, label, icon: Icon, className = "" }) => (
         <button
             onClick={() => executeCommand(`./${label}`, id)}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${activeTab === id
+            className={`flex items-center space-x-2 px-2 md:px-4 py-2 rounded-full transition-all duration-300 ${className} ${activeTab === id
                 ? 'bg-emerald-500 text-black font-bold shadow-[0_0_15px_rgba(16,185,129,0.5)]'
                 : 'text-slate-400 hover:text-emerald-400 hover:bg-slate-800'
                 }`}
@@ -157,24 +155,27 @@ const App = () => {
 
             {/* Boot Sequence Overlay */}
             {isBooting && (
-                <div className="fixed inset-0 z-[10001] bg-[#0a0a0c] flex flex-col items-center justify-center p-6 space-y-12">
-                    <div className="relative">
-                        <div className="w-32 h-32 border-2 border-emerald-500/20 rounded-full animate-[spin_3s_linear_infinite]" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <img src="/peacock-brand.png" alt="Logo" className="w-16 h-16 animate-pulse drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" />
+                <div className="fixed inset-0 z-[10001] bg-[#0a0a0c] flex items-center justify-center">
+                    <div className="relative flex flex-col items-center gap-8">
+                        {/* Logo with elegant glow */}
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full scale-150 animate-pulse" />
+                            <img
+                                src="/peacock-brand.png"
+                                alt="Gourav Singh"
+                                className="relative w-24 h-24 md:w-32 md:h-32 animate-[fadeInScale_1s_ease-out] drop-shadow-2xl"
+                            />
                         </div>
-                    </div>
-                    <div className="text-center space-y-2">
-                        <h2 className="text-2xl font-black text-white tracking-[0.5em] italic">ESTABLISHING_SIGNAL</h2>
-                        <div className="flex justify-center gap-1">
-                            {[1, 2, 3, 4, 5, 6, 7, 8].map(i => (
-                                <div key={i} className="w-1 h-3 bg-emerald-500 animate-[bounce_1.5s_infinite]" style={{ animationDelay: `${i * 0.1}s` }} />
+                        {/* Minimal loading indicator */}
+                        <div className="flex gap-1.5">
+                            {[1, 2, 3].map(i => (
+                                <div
+                                    key={i}
+                                    className="w-2 h-2 rounded-full bg-emerald-500/80 animate-[pulse_1.4s_ease-in-out_infinite]"
+                                    style={{ animationDelay: `${i * 0.2}s` }}
+                                />
                             ))}
                         </div>
-                    </div>
-                    <div className="absolute bottom-12 font-mono text-[10px] text-slate-500 uppercase tracking-widest text-center">
-                        Encrypted_Handshake: 0x92f...A22<br />
-                        Node_Status: SECURE
                     </div>
                 </div>
             )}
@@ -192,17 +193,21 @@ const App = () => {
             </div>
 
             {/* Navigation */}
-            <nav className="fixed top-8 left-1/2 -translate-x-1/2 z-50 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-full px-2 py-2 flex items-center space-x-1 shadow-2xl">
+            <nav className="fixed top-6 md:top-8 left-1/2 -translate-x-1/2 z-50 bg-black/40 backdrop-blur-3xl border border-white/10 rounded-full px-1 md:px-2 py-1 md:py-2 flex items-center space-x-0.5 md:space-x-1.5 shadow-2xl max-w-[98vw] md:max-w-none">
                 <button
                     onClick={() => executeCommand('./About', 'info')}
-                    className={`px-4 border-r border-white/10 mr-2 transition-all duration-500 hover:scale-110 active:scale-95 group/logo ${activeTab === 'info' ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`}
+                    className={`flex-shrink-0 px-2 md:px-4 border-r border-white/10 mr-0.5 md:mr-2 transition-all duration-500 hover:scale-110 active:scale-95 group/logo ${activeTab === 'info' ? 'opacity-100' : 'opacity-100 md:opacity-60'}`}
                 >
-                    <img src="/peacock-brand.png" alt="Logo" className={`w-10 h-10 transition-all duration-300 ${activeTab === 'info' ? 'drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] scale-110' : 'grayscale group-hover/logo:grayscale-0 group-hover/logo:drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]'}`} />
+                    <img
+                        src="/peacock-brand.png"
+                        alt="Logo"
+                        className={`w-7 h-7 md:w-10 md:h-10 object-contain transition-all duration-300 ${activeTab === 'info' ? 'drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] scale-110' : 'grayscale-0 md:grayscale group-hover/logo:grayscale-0'}`}
+                    />
                 </button>
                 <NavItem id="home" label="Home" icon={Terminal} />
                 <NavItem id="projects" label="Work" icon={Smartphone} />
                 <NavItem id="iot" label="IoT" icon={Cpu} />
-                <NavItem id="vault" label="Vault" icon={Lock} />
+                <NavItem id="vault" label="Vault" icon={Lock} className="hidden md:flex" />
             </nav>
 
             {/* Main Content */}
@@ -213,12 +218,12 @@ const App = () => {
                         <div className="flex flex-col lg:flex-row gap-12 items-start justify-between">
                             {/* Hero Section */}
                             <div className="text-center md:text-left space-y-8 lg:w-2/3">
-                                <div className="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-full text-emerald-400 text-xs font-mono uppercase tracking-[0.2em]">
+                                <div className="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-4 py-1.5 rounded-full text-emerald-400 text-xs font-medium uppercase tracking-widest">
                                     <span className="relative flex h-2 w-2">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                     </span>
-                                    <span>Signal Established</span>
+                                    <span>Available for Work</span>
                                 </div>
 
                                 <div className="relative group">
@@ -233,22 +238,22 @@ const App = () => {
                                 </div>
 
                                 <p className="text-xl md:text-3xl text-slate-400 max-w-3xl leading-relaxed font-light">
-                                    Engineering <span className="text-white font-medium border-b-2 border-emerald-500/30">resilient architectures</span> for
-                                    mobile, decentralized ecosystems, and hardware.
+                                    Software Engineer & <span className="text-white font-medium border-b-2 border-emerald-500/30">CampAtEaz Co-Founder</span> building
+                                    resilient digital ecosystems and purpose-driven architectures.
                                 </p>
 
                                 <div className="flex flex-wrap gap-4 pt-4">
                                     <button
                                         onClick={() => executeCommand('./deploy_work', 'projects')}
-                                        className="px-10 py-5 bg-emerald-500 text-black font-black uppercase tracking-[0.2em] text-xs rounded-full hover:scale-[1.05] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] transition-all flex items-center gap-3 active:scale-95"
+                                        className="px-10 py-5 bg-emerald-500 text-black font-black uppercase tracking-widest text-xs rounded-full hover:scale-[1.05] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] transition-all flex items-center gap-3 active:scale-95"
                                     >
-                                        Execute_Deployment <ExternalLink size={16} />
+                                        View My Work <ExternalLink size={16} />
                                     </button>
                                     <button
                                         onClick={() => executeCommand('./About', 'info')}
                                         className="px-8 py-4 bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest rounded-2xl hover:bg-white/10 transition-all"
                                     >
-                                        Information Node
+                                        About Me
                                     </button>
                                 </div>
                             </div>
@@ -258,19 +263,26 @@ const App = () => {
                                 <section className="p-1 px-1 mb-2">
                                     <div className="flex items-center justify-between mb-4">
                                         <h3 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.4em] flex items-center gap-2">
-                                            <Activity size={14} /> PEACOCK_JUNGLE_ARCADE
+                                            <Activity size={14} /> Quick Game
                                         </h3>
                                         <div className="w-12 h-[1px] bg-emerald-500/20"></div>
                                     </div>
                                     <PeacockGame />
                                 </section>
 
-                                <div className="p-6 bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/20 rounded-3xl relative overflow-hidden group hover:scale-[1.02] transition-transform">
+                                <div className="p-6 bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/20 rounded-3xl relative overflow-hidden group hover:scale-[1.02] transition-transform">
                                     <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                                        <Zap size={80} className="text-emerald-500" />
+                                        <Activity size={80} className="text-blue-500" />
                                     </div>
-                                    <p className="text-[10px] font-mono font-black text-emerald-400 uppercase mb-2">Node Performance</p>
-                                    <p className="text-3xl font-black text-white">42+ <span className="text-xs text-slate-500 uppercase font-bold tracking-tighter">Stages Cleared</span></p>
+                                    <p className="text-[10px] font-black text-blue-400 uppercase mb-4 tracking-widest">Our Squad</p>
+                                    <div className="aspect-video bg-white/[0.03] rounded-2xl overflow-hidden mb-4 border border-white/5 relative z-10">
+                                        <img
+                                            src="/Team Ganapati Front.jpeg"
+                                            alt="Team Ganapati"
+                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                        />
+                                    </div>
+                                    <h4 className="text-2xl font-black text-white italic tracking-tighter uppercase whitespace-nowrap">Team Ganapati</h4>
                                 </div>
                             </div>
                         </div>
@@ -283,8 +295,8 @@ const App = () => {
                                     <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]/40"></div>
                                     <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]/40"></div>
                                 </div>
-                                <span className="text-[10px] text-slate-600 uppercase font-black tracking-[0.4em]">Interactive_Executive_Control — v3.0.0</span>
-                                <div className="text-[10px] text-emerald-500 font-black animate-pulse bg-emerald-500/10 px-2 py-0.5 rounded">ONLINE</div>
+                                <span className="text-[10px] text-slate-600 uppercase font-black tracking-[0.4em]">Activity Log</span>
+                                <div className="text-[10px] text-emerald-500 font-black animate-pulse bg-emerald-500/10 px-2 py-0.5 rounded">LIVE</div>
                             </div>
                             <div className="p-8 space-y-3 min-h-[280px] max-h-[400px] overflow-y-auto custom-scrollbar">
                                 {terminalText.map((line, i) => (
@@ -296,7 +308,7 @@ const App = () => {
                                 {isTyping && <div className="animate-pulse inline-block w-2.5 h-5 bg-emerald-500 ml-8"></div>}
                             </div>
                             <div className="bg-white/5 p-6 px-10 border-t border-white/5 flex flex-wrap gap-6 items-center">
-                                <span className="text-[10px] text-slate-600 uppercase font-black tracking-widest">Entry_Nodes:</span>
+                                <span className="text-[10px] text-slate-600 uppercase font-black tracking-widest">Quick Links:</span>
                                 {['./Work', './IoT', './Vault'].map((cmd, i) => (
                                     <button
                                         key={i}
@@ -309,23 +321,87 @@ const App = () => {
                             </div>
                         </div>
 
-                        {/* Dynamic Skill Cloud */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12">
-                            {[
-                                { label: 'Architect', tech: 'Flutter / Dart', icon: Smartphone, desc: 'Production-grade UX' },
-                                { label: 'Infrastructure', tech: 'Supabase / Node', icon: Database, desc: 'Real-time scalability' },
-                                { label: 'Embedded', tech: 'ESP32 / Motors', icon: Cpu, desc: 'Hardware ecosystems' },
-                                { label: 'Security', tech: 'Vault / Crypto', icon: Lock, desc: 'ZKP & Decentralization' }
-                            ].map((skill, i) => (
-                                <div key={i} className="group p-6 bg-white/[0.02] border border-white/5 rounded-3xl hover:bg-white/[0.05] transition-all hover:border-emerald-500/30 hover:-translate-y-2">
-                                    <div className="p-3 bg-white/5 rounded-2xl w-fit mb-5 group-hover:scale-110 transition-transform">
-                                        <skill.icon size={24} className="text-slate-500 group-hover:text-emerald-500 transition-colors" />
-                                    </div>
-                                    <p className="text-[10px] text-slate-500 uppercase mb-1 font-black tracking-widest">{skill.label}</p>
-                                    <p className="text-white font-black text-lg mb-1">{skill.tech}</p>
-                                    <p className="text-xs text-slate-500 font-medium group-hover:text-slate-400 transition-colors">{skill.desc}</p>
+                        {/* Memories & Highlights: Expanded Bento Mosaic */}
+                        <div className="space-y-12 pt-12">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div>
+                                    <h2 className="text-3xl font-black text-white italic tracking-tighter uppercase flex items-center gap-3">
+                                        <Globe className="text-emerald-500" size={24} /> Memories & Highlights
+                                    </h2>
+                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.4em] mt-2">The IBW Event & Team Ganapati Archive</p>
                                 </div>
-                            ))}
+                                <div className="h-[1px] flex-grow mx-8 bg-white/5 hidden lg:block" />
+                                <div className="flex items-center gap-4">
+                                    <span className="text-[10px] font-black text-emerald-500/50 uppercase tracking-widest bg-emerald-500/5 px-4 py-2 rounded-full border border-emerald-500/10">12 TOTAL NODES</span>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-4 auto-rows-[200px]">
+                                {/* Feature: Whole Team (Large) */}
+                                <div className="lg:col-span-8 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                    <img src="/Ganapati Whole Team.jpeg" alt="Team" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
+                                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <h4 className="text-xl font-black text-white uppercase italic">Squad Assembly</h4>
+                                    </div>
+                                </div>
+
+                                {/* IBW Highlight 1 */}
+                                <div className="lg:col-span-4 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-700">
+                                    <img src="/WhatsApp Image 2026-02-06 at 10.50.54 PM.jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
+                                    <div className="absolute top-4 right-4 bg-blue-500 text-black text-[8px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-xl">IBW EVENT</div>
+                                </div>
+
+                                {/* IBW Mosaic 2 */}
+                                <div className="lg:col-span-3 lg:row-span-1 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                    <img src="/WhatsApp Image 2026-02-06 at 10.50.55 PM (1).jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                </div>
+
+                                {/* IBW Mosaic 3 */}
+                                <div className="lg:col-span-3 lg:row-span-1 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                    <img src="/WhatsApp Image 2026-02-06 at 10.50.57 PM.jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                </div>
+
+                                {/* Team Front (Medium) */}
+                                <div className="lg:col-span-6 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                    <img src="/Team Ganapati Front.jpeg" alt="Team Front" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
+                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-sm">
+                                        <span className="text-3xl font-black text-white italic uppercase tracking-[0.2em] -rotate-12">THE FRONTLINE</span>
+                                    </div>
+                                </div>
+
+                                {/* IBW Mosaic 4 */}
+                                <div className="lg:col-span-4 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-700">
+                                    <img src="/WhatsApp Image 2026-02-06 at 10.50.58 PM.jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                </div>
+
+                                {/* IBW Mosaic 5 */}
+                                <div className="lg:col-span-2 lg:row-span-1 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                    <img src="/WhatsApp Image 2026-02-06 at 10.50.58 PM (1).jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                </div>
+
+                                {/* IBW Mosaic 6 */}
+                                <div className="lg:col-span-3 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                    <img src="/WhatsApp Image 2026-02-06 at 10.51.03 PM.jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                </div>
+
+                                {/* IBW Mosaic 7 */}
+                                <div className="lg:col-span-3 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                    <img src="/WhatsApp Image 2026-02-06 at 10.51.08 PM.jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                </div>
+
+                                {/* IBW Mosaic 8 */}
+                                <div className="lg:col-span-6 lg:row-span-1 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                    <img src="/WhatsApp Image 2026-02-06 at 10.51.10 PM (1).jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                </div>
+
+                                {/* Placeholder: Closing Node */}
+                                <div className="lg:col-span-12 h-32 group relative bg-white/[0.01] border border-white/5 border-dashed rounded-[2rem] flex items-center justify-center gap-6 hover:bg-white/[0.03] transition-all">
+                                    <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-emerald-500/50 transition-colors">
+                                        <Zap size={18} className="text-slate-800 group-hover:text-emerald-500" />
+                                    </div>
+                                    <span className="text-[10px] font-black text-slate-700 uppercase tracking-[0.6em]">Awaiting more chapters</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -347,16 +423,16 @@ const App = () => {
                                     <div className="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-emerald-500/30"></div>
                                 </div>
                                 <div className="absolute -bottom-6 -left-6 z-20 bg-[#0a0a0c] border border-white/5 p-4 rounded-2xl shadow-2xl space-y-1">
-                                    <p className="text-[10px] font-black text-emerald-500/60 uppercase tracking-widest">Active_Node</p>
-                                    <p className="text-xl font-black text-white italic tracking-tighter">GOURAV_P</p>
+                                    <p className="text-[10px] font-black text-emerald-500/60 uppercase tracking-widest">Developer</p>
+                                    <p className="text-xl font-black text-white italic tracking-tighter">GOURAV S.</p>
                                 </div>
                             </div>
 
                             <div className="space-y-10 order-1 md:order-2">
                                 <div className="space-y-4">
-                                    <span className="text-[10px] font-black text-slate-700 uppercase tracking-[0.5em] block">./The_Architect</span>
+                                    <span className="text-[10px] font-black text-slate-700 uppercase tracking-[0.5em] block">Software Developer</span>
                                     <h2 className="text-7xl md:text-9xl font-black text-white tracking-tighter leading-none italic uppercase">
-                                        INF0_<br />CORE
+                                        ABOUT<br />ME
                                     </h2>
                                 </div>
                                 <p className="text-2xl text-slate-400 font-light leading-relaxed max-w-sm">
@@ -371,64 +447,138 @@ const App = () => {
                             <div className="flex flex-col md:flex-row gap-12 md:gap-24 items-start">
                                 <div className="md:w-1/3 pt-4">
                                     <h3 className="text-4xl font-black text-white uppercase italic tracking-tighter sticky top-40">Education</h3>
-                                    <p className="text-[10px] font-bold text-emerald-500/40 uppercase tracking-[0.6em] mt-4">0x01_ACADEMIA</p>
+                                    <p className="text-[10px] font-bold text-emerald-500/40 uppercase tracking-[0.6em] mt-4">Academic Background</p>
                                 </div>
                                 <div className="md:w-2/3 space-y-12">
                                     <div className="group border-b border-white/5 pb-10">
-                                        <h4 className="text-2xl font-black text-white mb-2 uppercase group-hover:text-emerald-400 transition-colors">Computer Science Engineering</h4>
+                                        <h4 className="text-2xl font-black text-white mb-2 uppercase group-hover:text-emerald-400 transition-colors">Bachelor of Computer Applications</h4>
+                                        <p className="text-base text-slate-400 mb-1">New Horizon College, Marathahalli, Bangalore</p>
                                         <p className="text-lg text-slate-500 leading-relaxed font-light">
-                                            Specializing in decentralized networks and system performance. Researching how minimalist design can reduce user friction in dense data environments.
+                                            Currently pursuing BCA, but already building production-grade applications and systems. Self-driven learner with hands-on experience across the full development stack.
                                         </p>
                                     </div>
-                                    <div className="grid grid-cols-2 gap-8">
-                                        {['Architectures', 'Cloud Native', 'Cybersecurity', 'AI Systems'].map(skill => (
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                                        {['Flutter', 'React JS', 'Python', 'JavaScript', 'Java', 'C/C++', 'PostgreSQL', 'SQL', 'Supabase', 'Firebase', 'Dart', 'Node.js'].map(skill => (
                                             <div key={skill} className="flex gap-4 items-center">
-                                                <div className="w-2 h-2 rounded-full bg-emerald-500/20"></div>
-                                                <span className="text-[12px] font-black text-slate-600 uppercase tracking-widest">{skill}</span>
+                                                <div className="w-2 h-2 rounded-full bg-emerald-500/40"></div>
+                                                <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">{skill}</span>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Section 2: Ventures */}
-                            <div className="flex flex-col md:flex-row-reverse gap-12 md:gap-24 items-start">
-                                <div className="md:w-1/3 pt-4 text-left md:text-right">
-                                    <h3 className="text-4xl font-black text-white uppercase italic tracking-tighter sticky top-40">Ventures</h3>
-                                    <p className="text-[10px] font-bold text-blue-500/40 uppercase tracking-[0.6em] mt-4">0x02_STARTUPS</p>
-                                </div>
-                                <div className="md:w-2/3 space-y-12">
-                                    <div className="group border-b border-white/5 pb-10">
-                                        <h4 className="text-2xl font-black text-white mb-2 uppercase group-hover:text-blue-400 transition-colors">Project_Alpha</h4>
-                                        <p className="text-lg text-slate-500 leading-relaxed font-light">
-                                            Developing a decentralized communication bridge between local IoT hardware and high-scale cloud clusters. Focus on sub-ms latency and zero-trust protocol implementation.
-                                        </p>
-                                    </div>
-                                    <div className="p-8 bg-white/[0.01] border border-white/5 rounded-3xl">
-                                        <div className="flex justify-between items-end">
-                                            <span className="text-[10px] font-black text-slate-700 uppercase tracking-widest">Protocol_V2_Sync</span>
-                                            <span className="text-xl font-mono text-blue-500">92.4%</span>
+                            {/* Section 2: Ventures (CampAtEaz) */}
+                            <div className="relative">
+                                {/* Asymmetric Layout Container */}
+                                <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center lg:items-start text-left">
+
+                                    {/* Left: Floating Pedestal Logo */}
+                                    <div className="lg:w-1/3 flex justify-center">
+                                        <div className="relative">
+                                            {/* Pedestal Glow */}
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-500/20 blur-[80px] rounded-full animate-pulse" />
+
+                                            {/* Glassmorphic Frame */}
+                                            <div className="relative group/logo-box">
+                                                <div className="w-56 h-72 bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[3rem] p-8 flex flex-col items-center justify-between shadow-2xl overflow-hidden animate-[levitate_6s_ease-in-out_infinite]">
+                                                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/logo-box:opacity-20 transition-opacity">
+                                                        <Activity size={80} className="text-blue-500" />
+                                                    </div>
+
+                                                    <div className="relative z-10 w-32 h-32 p-4 bg-white/5 rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                                                        <img
+                                                            src="/Campy_logo_5.png"
+                                                            alt="CampAtEaz"
+                                                            className="w-full h-full object-contain drop-shadow-2xl"
+                                                        />
+                                                    </div>
+
+                                                    <div className="text-center space-y-2">
+                                                        <p className="text-xl font-black text-white italic tracking-tighter">CAMPATEAZ</p>
+                                                        <span className="inline-block text-[9px] bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full font-bold uppercase tracking-widest">Co-Founder</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="h-1 w-full bg-white/5 rounded-full mt-4 overflow-hidden">
-                                            <div className="h-full bg-blue-500 w-[92.4%] animate-pulse"></div>
+                                    </div>
+
+                                    {/* Right: Asymmetric Content Grid */}
+                                    <div className="lg:w-2/3 space-y-12">
+                                        <div className="space-y-6">
+                                            <h3 className="text-4xl lg:text-5xl font-black text-white uppercase italic tracking-tighter leading-tight max-w-xl">
+                                                Revolutionizing <span className="text-blue-500">Campus Ecosystems</span>
+                                            </h3>
+                                            <p className="text-xl text-slate-400 font-light leading-relaxed max-w-2xl">
+                                                I co-founded <span className="text-white font-medium">CampAtEaz</span> to eliminate the friction between hungry students and overwhelmed canteens. It's not just an app—it's a high-scale operating system for campus hospitality.
+                                            </p>
+                                        </div>
+
+                                        {/* Value Nodes */}
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div className="p-6 bg-white/[0.02] border border-white/5 rounded-3xl hover:bg-white/[0.05] transition-all hover:border-blue-500/30 group">
+                                                <h4 className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-4 italic">The Challenge</h4>
+                                                <p className="text-white font-bold text-lg leading-snug group-hover:translate-x-1 transition-transform text-left">Long queues, order errors, and inefficient cash handling.</p>
+                                            </div>
+                                            <div className="p-6 bg-blue-500/5 border border-blue-500/10 rounded-3xl hover:bg-blue-500/10 transition-all hover:border-blue-500/30 group">
+                                                <h4 className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-4 italic">Our Solution</h4>
+                                                <p className="text-white font-bold text-lg leading-snug group-hover:translate-x-1 transition-transform text-left">Real-time scheduling, digital wallets, and predictive inventory tracking.</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Dynamic Metric */}
+                                        <div className="flex items-center justify-between p-1 bg-white/[0.02] border border-white/5 rounded-full px-6 py-2 w-fit">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
+                                                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Project Progress:</span>
+                                                <span className="text-sm font-mono text-blue-400 font-black">92.4% COMPLETE</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Section 3: Principles */}
-                            <div className="flex flex-col md:flex-row gap-12 md:gap-24 items-start">
-                                <div className="md:w-1/3 pt-4">
-                                    <h3 className="text-4xl font-black text-white uppercase italic tracking-tighter sticky top-40">Ideology</h3>
-                                    <p className="text-[10px] font-bold text-purple-500/40 uppercase tracking-[0.6em] mt-4">0x03_ETHOS</p>
-                                </div>
-                                <div className="md:w-2/3">
-                                    <blockquote className="text-4xl font-black text-white tracking-tighter leading-tight italic">
-                                        "REDUCTION IS NOT JUST DELETING; IT IS THE PURSUIT OF <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-500">ESSENCE</span>."
-                                    </blockquote>
-                                    <p className="text-lg text-slate-500 mt-10 leading-relaxed font-light">
-                                        I believe in interfaces that disappear. My work focuses on removing the noise between human intent and machine execution, creating tools that feel like extensions of the user rather than obstacles.
-                                    </p>
+                            {/* Section 3: Ideology */}
+                            <div className="relative group">
+                                {/* Ambient Background Deco */}
+                                <div className="absolute -left-20 top-0 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full group-hover:bg-emerald-500/10 transition-colors" />
+
+                                <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center lg:items-start text-left">
+                                    {/* Left: Section Header & Logo */}
+                                    <div className="lg:w-1/3 space-y-8 flex flex-col items-center lg:items-end text-center lg:text-right">
+                                        <div className="relative">
+                                            <div className="absolute inset-0 bg-emerald-500/20 blur-2xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-1000" />
+                                            <div className="relative w-32 h-32 lg:w-40 lg:h-40 p-4 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
+                                                <img
+                                                    src="/peacock-brand.png"
+                                                    alt="Peacock"
+                                                    className="w-full h-full object-contain"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h3 className="text-4xl font-black text-white uppercase italic tracking-tighter">Ideology</h3>
+                                            <p className="text-[10px] font-bold text-purple-500/40 uppercase tracking-[0.6em] mt-3">Personal Philosophy</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Right: Philosophy Quote */}
+                                    <div className="lg:w-2/3 space-y-10">
+                                        <blockquote className="text-4xl lg:text-5xl font-black text-white tracking-tighter leading-tight italic uppercase relative">
+                                            <div className="absolute -left-8 top-0 text-7xl text-white/5 font-serif">"</div>
+                                            "Being <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-500 text-6xl">You</span>. <br />
+                                            Don't read books, read <span className="text-white underline decoration-purple-500/50 underline-offset-8">you</span>."
+                                        </blockquote>
+                                        <div className="space-y-6">
+                                            <p className="text-xl text-slate-400 font-light leading-relaxed max-w-xl">
+                                                Read what's beyond you—the one which is <span className="text-white font-medium">beyond your name</span>.
+                                            </p>
+                                            <div className="w-12 h-1 bg-gradient-to-r from-purple-500 to-emerald-500 rounded-full" />
+                                            <p className="text-slate-500 font-medium italic leading-relaxed max-w-lg">
+                                                True engineering comes from self-awareness and understanding the core essence of existence, translated into clean, purposeful code.
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -440,9 +590,9 @@ const App = () => {
                                 className="group px-12 py-5 bg-white text-black font-black uppercase text-xs rounded-2xl hover:bg-emerald-500 transition-all shadow-2xl flex items-center gap-4 tracking-[0.4em]"
                             >
                                 <ChevronRight className="rotate-180" size={18} />
-                                <span>RETURN_TO_HOME</span>
+                                <span>Back to Home</span>
                             </button>
-                            <p className="text-[8px] font-black text-slate-800 uppercase tracking-[0.8em]">End_Of_Node</p>
+                            <p className="text-[8px] font-black text-slate-800 uppercase tracking-[0.8em]">End of Page</p>
                         </div>
                     </div>
                 )}
@@ -648,7 +798,7 @@ const App = () => {
 
             {/* Footer Info */}
             <footer className="fixed bottom-6 left-6 right-6 flex justify-between items-end pointer-events-none text-slate-600 text-[10px] font-mono uppercase tracking-[0.3em] overflow-hidden whitespace-nowrap z-50">
-                <div className="hidden md:block pb-1">Gourav_Singh_v3.2.26 // Production_Build</div>
+                <div className="hidden md:block pb-1">© 2026 Gourav Singh</div>
                 <ConnectivityBridge addLog={addLog} />
             </footer>
         </div>
@@ -660,8 +810,8 @@ const ConnectivityBridge = ({ addLog }) => {
         <div className="flex items-center space-x-8 pointer-events-auto bg-black/40 backdrop-blur-3xl border border-white/5 p-2 px-6 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-t-emerald-500/20 z-50 relative group/bridge">
             <div className="flex items-center space-x-4">
                 <div className="flex flex-col items-end">
-                    <span className="text-[8px] text-emerald-500 font-black tracking-tighter connectivity-pulse">ENCRYPTED_STREAM_ACTIVE</span>
-                    <span className="text-[10px] text-slate-400 font-black">CONNECT_BRIDGE_v3.1</span>
+                    <span className="text-[8px] text-emerald-500 font-black tracking-tighter connectivity-pulse">Let's Connect</span>
+                    <span className="text-[10px] text-slate-400 font-black">Social Links</span>
                 </div>
                 <div className="w-[1px] h-8 bg-white/10" />
             </div>
@@ -670,14 +820,14 @@ const ConnectivityBridge = ({ addLog }) => {
                 <SocialLink
                     href="https://github.com/Gourav2167"
                     icon={<Github size={20} />}
-                    label="GIT_NODE"
+                    label="GitHub"
                     id="github"
                     addLog={addLog}
                 />
                 <SocialLink
                     href="https://linkedin.com/in/gourav-singh01"
                     icon={<Linkedin size={20} />}
-                    label="MESH_NODE"
+                    label="LinkedIn"
                     id="linkedin"
                     addLog={addLog}
                 />
