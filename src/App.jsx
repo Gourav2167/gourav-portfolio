@@ -134,15 +134,16 @@ const App = () => {
     const NavItem = ({ id, label, icon: Icon, className = "" }) => (
         <button
             onClick={() => executeCommand(`./${label}`, id)}
-            className={`flex items-center space-x-2 px-2 md:px-4 py-2 rounded-full transition-all duration-300 ${className} ${activeTab === id
+            className={`flex items-center space-x-1.5 md:space-x-2 px-3 md:px-4 py-2 rounded-full transition-all duration-300 ${className} ${activeTab === id
                 ? 'bg-emerald-500 text-black font-bold shadow-[0_0_15px_rgba(16,185,129,0.5)]'
                 : 'text-slate-400 hover:text-emerald-400 hover:bg-slate-800'
                 }`}
         >
-            <Icon size={18} />
-            <span className="hidden md:inline capitalize">{label}</span>
+            <Icon size={16} className="md:w-[18px] md:h-[18px]" />
+            <span className="hidden sm:inline capitalize text-[10px] md:text-sm tracking-widest">{label}</span>
         </button>
     );
+
 
     return (
         <div className="min-h-screen bg-[#0a0a0c] text-slate-300 font-sans selection:bg-emerald-500/30 selection:text-white relative overflow-x-hidden cursor-none">
@@ -193,22 +194,23 @@ const App = () => {
             </div>
 
             {/* Navigation */}
-            <nav className="fixed top-6 md:top-8 left-1/2 -translate-x-1/2 z-50 bg-black/40 backdrop-blur-3xl border border-white/10 rounded-full px-1 md:px-2 py-1 md:py-2 flex items-center space-x-0.5 md:space-x-1.5 shadow-2xl max-w-[98vw] md:max-w-none">
+            <nav className="fixed top-4 md:top-8 left-1/2 -translate-x-1/2 z-50 bg-black/40 backdrop-blur-3xl border border-white/10 rounded-full px-1 md:px-2 py-1 md:py-1.5 flex items-center space-x-1 shadow-2xl max-w-[95vw] md:max-w-none">
                 <button
                     onClick={() => executeCommand('./About', 'info')}
-                    className={`flex-shrink-0 px-2 md:px-4 border-r border-white/10 mr-0.5 md:mr-2 transition-all duration-500 hover:scale-110 active:scale-95 group/logo ${activeTab === 'info' ? 'opacity-100' : 'opacity-100 md:opacity-60'}`}
+                    className={`flex-shrink-0 px-2 md:px-4 border-r border-white/10 mr-1 md:mr-2 transition-all duration-500 hover:scale-110 active:scale-95 group/logo ${activeTab === 'info' ? 'opacity-100' : 'opacity-100 md:opacity-60'}`}
                 >
                     <img
                         src="/peacock-brand.png"
                         alt="Logo"
-                        className={`w-7 h-7 md:w-10 md:h-10 object-contain transition-all duration-300 ${activeTab === 'info' ? 'drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] scale-110' : 'grayscale-0 md:grayscale group-hover/logo:grayscale-0'}`}
+                        className={`w-6 h-6 md:w-10 md:h-10 object-contain transition-all duration-300 ${activeTab === 'info' ? 'drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] scale-110' : 'grayscale-0 md:grayscale group-hover/logo:grayscale-0'}`}
                     />
                 </button>
                 <NavItem id="home" label="Home" icon={Terminal} />
                 <NavItem id="projects" label="Work" icon={Smartphone} />
                 <NavItem id="iot" label="IoT" icon={Cpu} />
-                <NavItem id="vault" label="Vault" icon={Lock} className="hidden md:flex" />
+                <NavItem id="vault" label="Vault" icon={Lock} className="hidden sm:flex" />
             </nav>
+
 
             {/* Main Content */}
             <main className="relative pt-40 pb-20 px-6 max-w-6xl mx-auto z-10">
@@ -230,31 +232,33 @@ const App = () => {
                                     <div className="absolute -top-24 -left-12 opacity-20 group-hover:opacity-40 transition-opacity">
                                         <img src="/peacock-brand.png" alt="Peacock" className="w-64 h-64 blur-2xl animate-pulse" />
                                     </div>
-                                    <h1 className="text-6xl md:text-[11rem] font-black text-white leading-[0.85] tracking-tighter drop-shadow-[0_20px_50px_rgba(0,0,0,1)] crt-flicker relative z-10">
+                                    <h1 className="text-5xl md:text-[11rem] font-black text-white leading-[0.85] tracking-tighter drop-shadow-[0_20px_50px_rgba(0,0,0,1)] crt-flicker relative z-10">
                                         GOURAV<br />
                                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-500 drop-shadow-glow">SINGH</span>
                                     </h1>
                                     <div className="absolute -top-12 -left-12 w-48 h-48 bg-emerald-500/10 blur-[100px] rounded-full group-hover:bg-emerald-500/20 transition-all duration-1000"></div>
                                 </div>
 
-                                <p className="text-xl md:text-3xl text-slate-400 max-w-3xl leading-relaxed font-light">
+                                <p className="text-lg md:text-3xl text-slate-400 max-w-3xl leading-relaxed font-light">
                                     Software Engineer & <span className="text-white font-medium border-b-2 border-emerald-500/30">CampAtEaz Co-Founder</span> building
                                     resilient digital ecosystems and purpose-driven architectures.
                                 </p>
 
+
                                 <div className="flex flex-wrap gap-4 pt-4">
                                     <button
                                         onClick={() => executeCommand('./deploy_work', 'projects')}
-                                        className="px-10 py-5 bg-emerald-500 text-black font-black uppercase tracking-widest text-xs rounded-full hover:scale-[1.05] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] transition-all flex items-center gap-3 active:scale-95"
+                                        className="px-6 md:px-10 py-4 md:py-5 bg-emerald-500 text-black font-black uppercase tracking-widest text-[10px] md:text-xs rounded-full hover:scale-[1.05] hover:shadow-[0_0_50px_rgba(16,185,129,0.5)] transition-all flex items-center gap-3 active:scale-95"
                                     >
-                                        View My Work <ExternalLink size={16} />
+                                        View My Work <ExternalLink size={14} />
                                     </button>
                                     <button
                                         onClick={() => executeCommand('./About', 'info')}
-                                        className="px-8 py-4 bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest rounded-2xl hover:bg-white/10 transition-all"
+                                        className="px-6 md:px-8 py-4 bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] md:text-xs rounded-2xl hover:bg-white/10 transition-all"
                                     >
                                         About Me
                                     </button>
+
                                 </div>
                             </div>
 
@@ -338,31 +342,36 @@ const App = () => {
 
                             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-4 auto-rows-[200px]">
                                 {/* Feature: Whole Team (Large) */}
-                                <div className="lg:col-span-8 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                <div className="col-span-2 lg:col-span-8 row-span-1 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
                                     <img src="/Ganapati Whole Team.jpeg" alt="Team" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
                                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <h4 className="text-xl font-black text-white uppercase italic">Squad Assembly</h4>
                                     </div>
                                 </div>
 
+
                                 {/* IBW Highlight 1 */}
-                                <div className="lg:col-span-4 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-700">
+                                <div className="col-span-1 md:col-span-2 lg:col-span-4 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-blue-500/30 transition-all duration-700">
+
                                     <img src="/WhatsApp Image 2026-02-06 at 10.50.54 PM.jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
                                     <div className="absolute top-4 right-4 bg-blue-500 text-black text-[8px] font-black px-3 py-1 rounded-full uppercase tracking-tighter shadow-xl">IBW EVENT</div>
                                 </div>
 
                                 {/* IBW Mosaic 2 */}
-                                <div className="lg:col-span-3 lg:row-span-1 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                <div className="col-span-1 lg:col-span-3 lg:row-span-1 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+
                                     <img src="/WhatsApp Image 2026-02-06 at 10.50.55 PM (1).jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                                 </div>
 
                                 {/* IBW Mosaic 3 */}
-                                <div className="lg:col-span-3 lg:row-span-1 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                <div className="col-span-1 lg:col-span-3 lg:row-span-1 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+
                                     <img src="/WhatsApp Image 2026-02-06 at 10.50.57 PM.jpeg" alt="IBW Event" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                                 </div>
 
                                 {/* Team Front (Medium) */}
-                                <div className="lg:col-span-6 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+                                <div className="col-span-2 lg:col-span-6 lg:row-span-2 group relative rounded-[2rem] overflow-hidden border border-white/5 hover:border-emerald-500/30 transition-all duration-700">
+
                                     <img src="/Team Ganapati Front.jpeg" alt="Team Front" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
                                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 backdrop-blur-sm">
                                         <span className="text-3xl font-black text-white italic uppercase tracking-[0.2em] -rotate-12">THE FRONTLINE</span>
@@ -431,9 +440,10 @@ const App = () => {
                             <div className="space-y-10 order-1 md:order-2">
                                 <div className="space-y-4">
                                     <span className="text-[10px] font-black text-slate-700 uppercase tracking-[0.5em] block">Software Developer</span>
-                                    <h2 className="text-7xl md:text-9xl font-black text-white tracking-tighter leading-none italic uppercase">
+                                    <h2 className="text-5xl md:text-9xl font-black text-white tracking-tighter leading-none italic uppercase">
                                         ABOUT<br />ME
                                     </h2>
+
                                 </div>
                                 <p className="text-2xl text-slate-400 font-light leading-relaxed max-w-sm">
                                     Building minimal, <span className="text-white">high-fidelity</span> software interfaces and resilient decentralised systems.
@@ -564,11 +574,12 @@ const App = () => {
 
                                     {/* Right: Philosophy Quote */}
                                     <div className="lg:w-2/3 space-y-10">
-                                        <blockquote className="text-4xl lg:text-5xl font-black text-white tracking-tighter leading-tight italic uppercase relative">
+                                        <blockquote className="text-3xl lg:text-5xl font-black text-white tracking-tighter leading-tight italic uppercase relative">
                                             <div className="absolute -left-8 top-0 text-7xl text-white/5 font-serif">"</div>
-                                            "Being <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-500 text-6xl">You</span>. <br />
+                                            "Being <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-500 text-4xl md:text-6xl">You</span>. <br />
                                             Don't read books, read <span className="text-white underline decoration-purple-500/50 underline-offset-8">you</span>."
                                         </blockquote>
+
                                         <div className="space-y-6">
                                             <p className="text-xl text-slate-400 font-light leading-relaxed max-w-xl">
                                                 Read what's beyond you—the one which is <span className="text-white font-medium">beyond your name</span>.
